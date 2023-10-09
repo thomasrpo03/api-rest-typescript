@@ -1,8 +1,8 @@
 import { Request, Response } from "express";
-import { connect } from "../database";
-import { Agent } from "../interfaces/Agent.interface";
-import { agentSchema } from "../schemas";
 import { RowDataPacket } from "mysql2";
+import { connect } from "../database";
+import { agentSchema } from "../schemas";
+import { Agent } from "../interfaces/agent.interface";
 
 //List All Agents
 export async function getAgents(
@@ -41,7 +41,10 @@ export async function getAgentById(req: Request, res: Response) {
     }
 
     return res.json(rows[0]);
-  } catch (error) {}
+  } catch (error) {
+    console.error("Error fetching agent:", error);
+    return res.status(500).json({ message: "Error fetching agent" });
+  }
 }
 
 //Create Agent
@@ -96,7 +99,7 @@ export async function updateAgent(req: Request, res: Response) {
       agentId,
     ]);
 
-    return res.json({ message: "Agent updated" });
+    return res.json({ message: "Agent updated", agentId: updatedAgentData });
   } catch (error) {
     console.error("Error updating agent:", error);
     return res.status(500).json({ message: "Error updating agent" });

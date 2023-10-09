@@ -1,9 +1,17 @@
 import { Router } from "express";
-import { createAgent, getAgents } from "../controllers/agents.controller";
+import {
+  createAgent,
+  deactivateAgent,
+  getAgentById,
+  getAgents,
+  updateAgent,
+} from "../controllers/agents.controller";
 const router = Router();
 
-router.route("/agents")
-    .get(getAgents)
-    .post(createAgent)
+router.get("/agents", getAgents);
+router.get("/agents/:id", getAgentById);
+router.post("/agents", createAgent);
+router.put("/agents/:id", updateAgent);
+router.delete("/agents/:id", deactivateAgent);
 
-export default router
+export default router;

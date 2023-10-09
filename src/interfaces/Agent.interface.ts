@@ -3,6 +3,7 @@ export interface Agent {
   name: string;
   phone: string;
   email: string;
+  active: boolean;
   created_at: Date;
   updated_at: Date;
 }

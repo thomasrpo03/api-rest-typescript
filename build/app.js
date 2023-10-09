@@ -14,14 +14,37 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.App = void 0;
 const express_1 = __importDefault(require("express"));
+const morgan_1 = __importDefault(require("morgan"));
+const cors_1 = __importDefault(require("cors"));
+//Routes
+const index_routes_1 = __importDefault(require("./routes/index.routes"));
+const agents_routes_1 = __importDefault(require("./routes/agents.routes"));
+const clients_routes_1 = __importDefault(require("./routes/clients.routes"));
 class App {
-    constructor() {
+    constructor(port) {
+        this.port = port;
         this.app = (0, express_1.default)();
+        this.settings();
+        this.middlewares();
+        this.routes();
+    }
+    settings() {
+        this.app.set("port", this.port || process.env.PORT || 3000);
+    }
+    middlewares() {
+        this.app.use((0, morgan_1.default)(`dev`));
+        this.app.use(express_1.default.json());
+        this.app.use((0, cors_1.default)());
+    }
+    routes() {
+        this.app.use("/api", index_routes_1.default);
+        this.app.use("/api", agents_routes_1.default);
+        this.app.use("/api", clients_routes_1.default);
     }
     listen() {
         return __awaiter(this, void 0, void 0, function* () {
-            yield this.app.listen(3000);
-            console.log(`Server on port: `, 3000);
+            yield this.app.listen(this.app.get("port"));
+            console.log(`Server on port: `, this.app.get("port"));
         });
     }
 }

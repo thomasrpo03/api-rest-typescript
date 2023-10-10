@@ -1,4 +1,4 @@
-import e, {Request, Response} from "express";
+import {Request, Response} from "express";
 import {RowDataPacket} from "mysql2";
 import {connect} from "../database";
 import {clientSchema} from "../schemas";

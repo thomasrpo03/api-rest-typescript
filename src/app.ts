@@ -6,6 +6,7 @@ import cors from "cors";
 import indexRoutes from "./routes/index.routes";
 import agentsRoutes from "./routes/agents.routes";
 import clientsRoutes from "./routes/clients.routes";
+import authRoutes from "./routes/auth.routes";
 
 export class App {
   private app: Application;
@@ -28,6 +29,7 @@ export class App {
   }
 
   routes() {
+    this.app.use("/api/auth",authRoutes)
     this.app.use("/api", indexRoutes);
     this.app.use("/api", agentsRoutes);
     this.app.use("/api", clientsRoutes);

@@ -16,10 +16,13 @@ exports.App = void 0;
 const express_1 = __importDefault(require("express"));
 const morgan_1 = __importDefault(require("morgan"));
 const cors_1 = __importDefault(require("cors"));
+const dotenv_1 = __importDefault(require("dotenv"));
 //Routes
 const index_routes_1 = __importDefault(require("./routes/index.routes"));
 const agents_routes_1 = __importDefault(require("./routes/agents.routes"));
 const clients_routes_1 = __importDefault(require("./routes/clients.routes"));
+const auth_routes_1 = __importDefault(require("./routes/auth.routes"));
+dotenv_1.default.config();
 class App {
     constructor(port) {
         this.port = port;
@@ -29,7 +32,7 @@ class App {
         this.routes();
     }
     settings() {
-        this.app.set("port", this.port || process.env.PORT || 3000);
+        this.app.set("port", this.port);
     }
     middlewares() {
         this.app.use((0, morgan_1.default)(`dev`));
@@ -37,6 +40,7 @@ class App {
         this.app.use((0, cors_1.default)());
     }
     routes() {
+        this.app.use("/api/auth", auth_routes_1.default);
         this.app.use("/api", index_routes_1.default);
         this.app.use("/api", agents_routes_1.default);
         this.app.use("/api", clients_routes_1.default);

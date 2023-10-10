@@ -55,7 +55,7 @@ export async function signIn(req: Request, res: Response): Promise<Response> {
         const token = jwt.sign({
             userId: user.id,
             username: user.username
-        }, 'ultra-secret-thomas-key', {expiresIn: '1h'});
+        }, process.env.SECRET_KEY || 'ultra-secret-thomas-key', {expiresIn: '1h'});
 
         return res.json({token});
     } catch (error) {

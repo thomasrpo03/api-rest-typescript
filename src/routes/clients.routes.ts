@@ -5,13 +5,14 @@ import {
     getClients,
     updateClient,
 } from "../controllers/clients.controller";
+import {validateToken} from "../middlewares/validate.token";
 
 const router = Router();
 
-router.get("/clients", getClients);
-router.get("/clients/:id", getClientById);
-router.post("/clients", createClient);
-router.put("/clients/:id", updateClient);
-router.delete("/clients/:id", deactivateClient);
+router.get("/clients", validateToken, getClients);
+router.get("/clients/:id", validateToken, getClientById);
+router.post("/clients", validateToken, createClient);
+router.put("/clients/:id", validateToken, updateClient);
+router.delete("/clients/:id", validateToken, deactivateClient);
 
 export default router;

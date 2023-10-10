@@ -110,12 +110,12 @@ export async function deactivateClient(req: Request, res: Response) {
     const clientId = req.params.id;
     try {
         const conn = await connect();
-        const [exisitingClient] = await conn.query<RowDataPacket[]>(
+        const [existingClient] = await conn.query<RowDataPacket[]>(
             "SELECT * FROM CLIENTS WHERE id = ?",
             [clientId]
         )
 
-        if (exisitingClient.length === 0) {
+        if (existingClient.length === 0) {
             return res.status(404).json({message: "Client not found"});
         }
 

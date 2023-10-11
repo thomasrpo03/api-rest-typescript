@@ -17,3 +17,12 @@ export const userSchema = Joi.object({
     username: Joi.string().required(),
     password: Joi.string().required(),
 })
+
+export const appointmentSchema = Joi.object({
+    client_id: Joi.number().required(),
+    agent_id: Joi.number().required(),
+    date: Joi.date().required(),
+    time: Joi.string().required(),
+    location: Joi.string().required(),
+    notes: Joi.string(),
+})

@@ -4,10 +4,11 @@ import cors from "cors";
 import dotenv from "dotenv";
 
 //Routes
+import authRoutes from "./routes/auth.routes";
 import indexRoutes from "./routes/index.routes";
 import agentsRoutes from "./routes/agents.routes";
 import clientsRoutes from "./routes/clients.routes";
-import authRoutes from "./routes/auth.routes";
+import appointmentsRoutes from "./routes/appointments.routes";
 
 dotenv.config()
 
@@ -36,6 +37,7 @@ export class App {
         this.app.use("/api", indexRoutes);
         this.app.use("/api", agentsRoutes);
         this.app.use("/api", clientsRoutes);
+        this.app.use("/api", appointmentsRoutes);
     }
 
     async listen() {

@@ -27,7 +27,7 @@ export async function getAgents(
 }
 
 //List Agent by ID
-export async function getAgentById(req: Request, res: Response) {
+export async function getAgentById(req: Request, res: Response): Promise<Response> {
     const agentId = req.params.id;
     try {
         const conn = await connect();
@@ -48,7 +48,7 @@ export async function getAgentById(req: Request, res: Response) {
 }
 
 //Create Agent
-export async function createAgent(req: Request, res: Response) {
+export async function createAgent(req: Request, res: Response): Promise<Response> {
     const newAgent: Agent = req.body;
 
     const {error} = agentSchema.validate(newAgent);
@@ -72,7 +72,7 @@ export async function createAgent(req: Request, res: Response) {
 }
 
 //Update Agent
-export async function updateAgent(req: Request, res: Response) {
+export async function updateAgent(req: Request, res: Response): Promise<Response> {
     const agentId = req.params.id;
     const updatedAgentData: Agent = req.body;
 
@@ -107,7 +107,7 @@ export async function updateAgent(req: Request, res: Response) {
 }
 
 //Delete Agent
-export async function deactivateAgent(req: Request, res: Response) {
+export async function deactivateAgent(req: Request, res: Response): Promise<Response> {
     const agentId = req.params.id;
 
     try {

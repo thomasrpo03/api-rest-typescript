@@ -18,10 +18,11 @@ const morgan_1 = __importDefault(require("morgan"));
 const cors_1 = __importDefault(require("cors"));
 const dotenv_1 = __importDefault(require("dotenv"));
 //Routes
+const auth_routes_1 = __importDefault(require("./routes/auth.routes"));
 const index_routes_1 = __importDefault(require("./routes/index.routes"));
 const agents_routes_1 = __importDefault(require("./routes/agents.routes"));
 const clients_routes_1 = __importDefault(require("./routes/clients.routes"));
-const auth_routes_1 = __importDefault(require("./routes/auth.routes"));
+const appointments_routes_1 = __importDefault(require("./routes/appointments.routes"));
 dotenv_1.default.config();
 class App {
     constructor(port) {
@@ -44,6 +45,7 @@ class App {
         this.app.use("/api", index_routes_1.default);
         this.app.use("/api", agents_routes_1.default);
         this.app.use("/api", clients_routes_1.default);
+        this.app.use("/api", appointments_routes_1.default);
     }
     listen() {
         return __awaiter(this, void 0, void 0, function* () {
